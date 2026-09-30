@@ -1,67 +1,67 @@
 # AdvPL Coding Standards
 
-O presente documento tem por objetivo estabelecer um padrão de boas práticas a serem utilizadas pelas equipes de Desenvolvimento NG que atuam na plataforma Protheus AdvPL. As regras aqui listadas **não são restritivas**, mas buscam estabelecer uma identidade única para os fontes. A adoção desse padrão deve naturalmente se tornar um hábito, aumentando a legibilidade dos fontes e proporcionando mais segurança no processo de manutenção de sistemas.
+This document sets out a standard of good practices for the NG development teams working on the Protheus AdvPL platform. The rules listed here are **not restrictive**; they aim to give the source code a single, consistent identity. Following the standard should naturally become a habit, making the code easier to read and making system maintenance safer.
 
-Novas funções devem ser desenvolvidas considerando as boas práticas listadas, e funções já existentes devem ser adequadas gradativamente. Entretanto **não se recomenda** a mudança de trechos que não fazem parte do escopo de alteração, de forma a não comprometer a revisão técnica do fonte nem gerar risco de inserção de novos bugs acidentalmente.
+New functions should be written following these practices, and existing functions should be brought in line gradually. However, changing code that is outside the scope of a change is **not recommended**, so as not to complicate the code review or accidentally introduce new bugs.
 
 
-## Arquivo
+## Files
 
-- A extensão deve ser minúscula (exemplo: `.prw`, `.apw`)
+- The file extension must be lowercase (for example: `.prw`, `.apw`)
 
-- O nome do arquivo deve ser preferencialmente em minúsculo
+- The file name should preferably be lowercase
 
-## Estilo
+## Style
 
-- Tabs somente para indentação, não para separação
+- Use tabs only for indentation, not for alignment
 
-> A tabulação deve ser utilizada somente à esquerda, antes de iniciar a linha e nunca no meio da linha. O motivo é que quando o arquivo for aberto em diferentes editores (TDS, VSCode, Sublime, etc.), a formatação será respeitada
+> Tabs should only be used on the left, before the line starts, and never in the middle of a line. That way the formatting is preserved when the file is opened in different editors (TDS, VSCode, Sublime, etc.)
 
-- Nome de variáveis devem se basear na notação húngara
+- Variable names should follow Hungarian notation
 
->Iniciar por:
->- n-numérico
->- c-char/string
->- d-data
->- l-logic/boolean
->- a-array/matriz
->- o-objetos
->- b-bloco de código
->- x-indefinido
+>Start with:
+>- n - numeric
+>- c - char/string
+>- d - date
+>- l - logical/boolean
+>- a - array/matrix
+>- o - object
+>- b - code block
+>- x - undefined
 
-- Evite nomes de variáveis como `nX` ou `nY` (exceto para índices). Seja mais descritivo
+- Avoid variable names like `nX` or `nY` (except for indexes). Be more descriptive
 
-- Prefira declarar variáveis agrupando-as logicamente por tipo ou utilização, separando por linhas
+- Prefer declaring variables grouped logically by type or purpose, on separate lines
 
-- É redundância inicializar variáveis com `Nil`, exceto variáveis públicas, que por sua vez não são comuns - no geral se considera uma prática ruim por poluir o escopo global
+- Initializing variables with `Nil` is redundant, except for public variables, which should be rare anyway: they are generally considered bad practice because they pollute the global scope
 
-- Palavras-chave da linguagem devem usar **UpperCamelCase** (exemplos: `If`, `EndIf`, `While`)
+- Language keywords should use **UpperCamelCase** (examples: `If`, `EndIf`, `While`)
 
-- Ao terminar uma instrução `While` ou `Do While`, prefira `End` e `EndDo` respectivamente
+- To end a `While` or `Do While` statement, prefer `End` and `EndDo` respectively
 
-- Ao terminar uma instrução `For`, prefira `Next <variable>` ao invés de somente `Next`
+- To end a `For` statement, prefer `Next <variable>` over just `Next`
 
-- Nomes de variáveis locais devem ser em **lowerCamelCase** (exemplos: `cName`, `nAge`)
+- Local variable names should use **lowerCamelCase** (examples: `cName`, `nAge`)
 
-- Nomes de funções em notação húngara devem usar **lowerCamelCase** (exemplo: `aAdd`)
+- Function names in Hungarian notation should use **lowerCamelCase** (example: `aAdd`)
 
-- Use as variáveis com nomes iguais em tamanho e caixa (não faça `thisIsMyVari` e `THISISMYVARI`)
+- Always write a variable name with the same length and case (don't mix `thisIsMyVari` and `THISISMYVARI`)
 
-- Nomes de funções sem notação húngara devem usar **UpperCamelCase** (exemplo: `RetSqlName`)
+- Function names without Hungarian notation should use **UpperCamelCase** (example: `RetSqlName`)
 
-- Diretivas do pré-processador (#define < include >) devem referenciar a include com a mesma capitulação do arquivo físico, preferencialmente letras minúsculas.
+- Preprocessor directives (#define < include >) should reference the include with the same capitalization as the physical file, preferably lowercase.
 
-> É uma boa prática que evita conflitos de case sensitive em processos de compilação no Linux, por exemplo.
+> This is a good practice that avoids case-sensitivity conflicts when compiling on Linux, for example.
 
-- Evite ultrapassar 120 colunas horizontalmente. Quebre o código com `;` quando necessário
+- Avoid going past 120 columns. Break the code with `;` when needed
 
-- Valores lógicos devem usar caixa alta (exemplo: `.F.`)
+- Logical values should be uppercase (example: `.F.`)
 
-- Espaço entre operadores. Use `nValue > nExpected` ao invés de `nValue>nExpected`
+- Put spaces around operators. Use `nValue > nExpected` instead of `nValue>nExpected`
 
-- Idioma padronizado. Evite misturar português e inglês quando possível
+- Use one language consistently. Avoid mixing Portuguese and English where possible
 
-- Deixar 1 linha em branco para cada *statement*, exceto conjuntos de *statements*
+- Leave 1 blank line after each *statement*, except for groups of related *statements*
 
 ```
 Function Test()
@@ -79,89 +79,89 @@ Function Test()
 Return
 ```
 
-- Separar funções, pulando uma linha após o return, antes de inciar um novo bloco
+- Separate functions with a blank line after the return, before starting a new block
 
-- Deixar 1 linha vazia no final de cada arquivo
+- Leave 1 empty line at the end of each file
 
-> Ferramentas de diff se perdem sem linha final e alguns editores já salvam por padrão uma linha extra. Alguns compiladores não entendem o fim de arquivo (não é o caso do AdvPL), por isso é uma boa prática em programação.
+> Diff tools get confused without a final newline, and some editors already add one by default. Some compilers don't recognize the end of the file without it (not the case for AdvPL), so it's a good programming practice.
 
-- Prefira aspas simples `'` ao invés de duplas `"`
+- Prefer single quotes `'` over double quotes `"`
 
-> Aspas simples facilitam a leitura do código e permitem, por padrão, o uso de aspas duplas nas strings (ex: cString := 'Verifique o campo "quantidade" na tela')
+> Single quotes make the code easier to read and let you use double quotes inside strings (e.g. cString := 'Check the "quantity" field on the screen')
 
-- Para acesso de índices múltiplos, evite `aList[ nI ][ nJ ]`. Use `aList[ nI, nJ ]`
+- To access multiple indexes, avoid `aList[ nI ][ nJ ]`. Use `aList[ nI, nJ ]`
 
-- Evite utilizar mais do que três instruções `For.. Next` em cascata
+- Avoid nesting more than three `For.. Next` loops
 
-- Funções **não** devem receber mais que 6 parâmetros (dessa forma se mantém uma função mais coesa, com um objetivo específico)
+- Functions should **not** take more than 6 parameters (this keeps a function cohesive, with a single purpose)
 
-> Esse é um padrão utilizado em praticamente qualquer linguagem de programação com funções. Funções mestras, muito grandes, são muito mais difíceis de manter e de testar do que funções que fazem uma coisa, e a fazem bem feito. Testes unitários são integráveis a funções simples, mas difíceis em funções com muitos parâmetros. É até comum que as pessoas se percam com tantos parâmetros vazios (ex: TObj:New(100,30,,,,,,.F.)).
+> This standard applies to practically any programming language with functions. Large "master" functions are much harder to maintain and test than functions that do one thing and do it well. Unit tests fit simple functions easily but are hard to write for functions with many parameters. It's also common for people to get lost among so many empty parameters (e.g. TObj:New(100,30,,,,,,.F.)).
 
-> Importante ressaltar que cada função deve ser exatamente isso: uma função. Quanto a isso, tem dezenas de artigos sobre software engineering de como funções com muitos parâmetros quebram modularidade e reuso. Normalmente funções que precisam de muitos parâmetros são passíveis de melhoria para melhor abstração em sua arquitetura.
+> Keep in mind that each function should be exactly that: one function. There are dozens of software engineering articles on how functions with many parameters break modularity and reuse. Functions that need many parameters usually point to an architecture that could be better abstracted.
 
-- Não desenvolva funções de alto acoplamento, quer dizer, funções que precisam estar acopladas à outras funções ou variáveis para funcionar (como o caso de funções que utilizam variáveis private declaradas em outro fonte)
+- Don't write tightly coupled functions, meaning functions that depend on other functions or variables in order to work (such as functions that use private variables declared in another source file)
 
-- Evite aninhamentos com mais de 3 statements (exemplo: `If` dentro de `If` dentro de `If`)
+- Avoid nesting more than 3 statements (for example: an `If` inside an `If` inside an `If`)
 
-- A função de If em linha deve ser utilizada com os dois I's em maiúsculo: `IIf`
+- The inline If function should be written with both I's in uppercase: `IIf`
 
-- Use `If` somente para *statement* (If .. Else .. EndIf) e `IIf` para *expressão* (x:= IIf(lVar,10,20))
+- Use `If` only for *statements* (If .. Else .. EndIf) and `IIf` for *expressions* (x:= IIf(lVar,10,20))
 
-> *Statements* não atribuem valor, por exemplo `If (lVar)` enquanto *expressão* atribui, por exemplo `x := If(lVar, 10, 20)`. O AdvPL permite a ambiguidade de se usar `If` e `IIf` para expressões. Nesse caso utilize sempre `IIf`, pois se usar `If` o compilador irá buscar pelo `EndIf`, o que poderia gerar erro em outras linguagens.
+> *Statements* don't return a value, for example `If (lVar)`, while *expressions* do, for example `x := If(lVar, 10, 20)`. AdvPL allows the ambiguity of using both `If` and `IIf` in expressions. In that case, always use `IIf`, because with `If` the compiler will look for the `EndIf`, which could cause errors in other languages.
 
-- Use `!=` ao invés de `<>`
+- Use `!=` instead of `<>`
 
-- Prefira  `==` para comparação ao invés de apenas `=`
+- Prefer `==` for comparison instead of just `=`
 
-- Não faça `== .T.`
+- Don't write `== .T.`
 
-- Use `!` ao invés de `.Not.`
+- Use `!` instead of `.Not.`
 
-## Espaçamento
+## Spacing
 
-- Deve haver 1 espaço entre os argumentos de função, blocos e arrays (exemplo: `RetSqlName( 'STJ' )`)
+- Put 1 space inside function arguments, blocks and arrays (example: `RetSqlName( 'STJ' )`)
 
-- Deve haver 1 espaço após cada vírgula (exemplo: `{ 1, 2, 3 }`)
+- Put 1 space after each comma (example: `{ 1, 2, 3 }`)
 
-- Deve haver espaço entre parâmetros de funções (use `Call( 1, 2, 3 )` e não `Call(1,2,3)`)
+- Put spaces between function parameters (use `Call( 1, 2, 3 )`, not `Call(1,2,3)`)
 
-> A recomendação é usar espaçamento antes de iniciar o primeiro parâmetro, entre cada parâmetro e ao final. Entretanto, o primeiro e último espaços ficam a critério de cada um.
+> The recommendation is to add a space before the first parameter, between parameters and after the last one. The first and last spaces are optional.
 
-- O `Return` pode ficar alinhado à esquerda (mesmo alinhamento de Function), mesmo não sendo um terminador
+- `Return` may be aligned to the left (same alignment as Function), even though it is not a terminator
 
-- Em comentários, 1 espaço após `//`
+- In comments, put 1 space after `//`
 
-> Apesar de não ser uma obrigação, o espaçamento antes de começar a descrever o comentário auxilia na leitura e também a encontrar e substituir programaticamente padrões da linguagem.
+> While not mandatory, a space before the comment text makes it easier to read and to find and replace language patterns programmatically.
 
-- Prefira comentários em `//` para quando uma linha e `/**/` para trechos de código ou comentário de parâmetros (ex: function(10`/*nAltura*/`,20`/*nLargura*/`))
+- Prefer `//` for single-line comments and `/**/` for blocks of code or parameter comments (e.g. function(10`/*nHeight*/`,20`/*nWidth*/`))
 
-## Redundância
+## Redundancy
 
-- Substitua `If` dentro de `If` por `.And.`
+- Replace an `If` inside an `If` with `.And.`
 
-## Funcionamento
+## Behavior
 
-- Lembre-se de, ao criar uma tabela temporária, fechá-la com `dbCloseArea` e para casos em que se usa FWTemporaryTable, usar o método `delete`
+- When creating a temporary table, remember to close it with `dbCloseArea`, and when using FWTemporaryTable, call its `delete` method
 
-- Lembre-se de fechar o _handler_ para o arquivo com `fClose` ao usar `fOpen`
+- Remember to close the file _handler_ with `fClose` when using `fOpen`
 
-- Quando deslocar para outro registro utilizando `dbSkip`, garanta estar posicionado na tabela desejada, caso contrário utilize `TABLE->( dbSkip() )` ou então utilize `dbSelectArea( TABLE )` antes do `dbSkip()`
+- When moving to another record with `dbSkip`, make sure the right table is selected; otherwise use `TABLE->( dbSkip() )` or call `dbSelectArea( TABLE )` before `dbSkip()`
 
-- Se atente ao uso de funções (Ex: FWTemporaryTable) no meio de blocos de transação, pois em Oracle sua chamada pode realizar o commit dos dados no meio do processo
+- Be careful when calling functions (e.g. FWTemporaryTable) inside transaction blocks, because on Oracle the call may commit the data in the middle of the process
 
-## Funções
+## Functions
 
-- Toda função deve ter um cabeçalho de documentação baseado no modelo Protheus.doc, e o autor genérico (como "NG Informática") não deve ser utilizado
+- Every function must have a documentation header based on the Protheus.doc template, and a generic author (such as "NG InformÃ¡tica") must not be used
 
-- São consideradas **funções genéricas** aquelas que se aplicam a qualquer módulo, normalmente sem tratar de conceitos e regra de negócio. Devem ser criadas em fontes genéricos como NGUtil e preferencialmente começar pelos caracteres `NG`
+- **Generic functions** are those that apply to any module, usually without handling business concepts or rules. They should be created in generic source files such as NGUtil and preferably start with `NG`
 
-- São consideradas **funções genéricas do módulo** aquelas que atendem regras mais genéricas de algum módulo, sendo utilizadas em um grupo de rotinas. Devem ser criadas em fontes do módulo como MNTUtil ou MDTUtil e preferencialmente começar pelos caracteres do módulo, ex: `MNT` ou `MDT`
+- **Module generic functions** are those that handle more general rules of a module and are used by a group of routines. They should be created in the module's source files, such as MNTUtil or MDTUtil, and preferably start with the module prefix, e.g. `MNT` or `MDT`
 
-- São consideradas **funções de rotina** aquelas que atendem regras específicas de alguma rotina, mas que também podem ser chamadas externamente. Devem ser criadas no fonte que a utiliza e preferencialmente começar pelos caracteres da própria rotina, como `MNTA080Cad()`. Evitar também reduzir o identificador do fonte para `MNA080` ou `MNT080`
+- **Routine functions** are those that handle rules specific to one routine but can also be called from elsewhere. They should be created in the source file that uses them and preferably start with the routine's own name, such as `MNTA080Cad()`. Also avoid shortening the source identifier to `MNA080` or `MNT080`
 
-- São consideras **funções estáticas** aquelas que são utilizadas apenas por um determinado fonte, sem chamada  externa por outros fontes. Devem ser criadas no fonte que a utiliza e preferencialmente iniciando pelo caracter `f` como `fCalcHora()`
+- **Static functions** are those used only by a single source file, with no external calls from other files. They should be created in the source file that uses them and preferably start with `f`, as in `fCalcHora()`
 
 
-## Referências
+## References
 
 AdvPL Coding Standards - https://github.com/haskellcamargo/advpl-coding-standards by @haskellcamargo
